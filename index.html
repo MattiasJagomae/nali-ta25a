@@ -1,0 +1,64 @@
+<style>
+  body{
+    display: block;
+    margin: auto;
+    width: 50%;
+    font:2rem Arial;
+    color: whitesmoke;
+
+    background-color: black;
+  }
+  button{
+    display: block;
+    font:2rem Arial;
+    color: black;
+  }
+</style>
+<h1>TASUTA LAHEDAD Naljad
+    <button id = "butn">
+    genereeri nali
+    </button>
+    <h2>
+      VAJUTA NUPPU JA SIIS TULEB NALJAKAS NALI!!!
+    </h2>
+    <h4>
+      <button id ="setupb">
+      </button>
+    </h4>
+    <h5>
+          <button id="punchlineb">
+            
+          </button>
+        </h5>
+    <hr>
+</h1>
+
+
+<script>
+  let setupdon = false
+
+  let setup = ""
+  let punchline = ""
+
+  async function getsetup() {
+    const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+    const data = await response.json();
+    setup = data.setup
+    punchline = data.punchline
+    setupdon = true;
+    document.getElementById("setupb").innerHTML=setup;
+  }
+	document.getElementById("butn").onclick = function () {
+        if(setupdon===false) {
+          getsetup();
+          document.getElementById("setupb").innerHTML="";
+          document.getElementById("punchlineb").innerHTML="";
+        };
+  };
+  document.getElementById("setupb").onclick = function () {
+    if(setupdon===true) {
+          document.getElementById("punchlineb").innerHTML=punchline;
+          setupdon = false;
+    };
+  };
+</script>
